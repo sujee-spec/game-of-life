@@ -23,9 +23,10 @@ var directions = [][]int{
 	{1, -1}, {1, 0}, {1, 1},
 }
 
-func countLiveNeighbors(board [][]int, row, col int) int {
-	m := len(board)
-	n := len(board[0])
+
+func (b *Board) countLiveNeighbors(row, col int) int {
+	m := len(b.matrix)
+	n := len(b.matrix[0])
 	liveCount := 0
 
 	for _, dir := range directions {
@@ -33,7 +34,7 @@ func countLiveNeighbors(board [][]int, row, col int) int {
 		newCol := col + dir[1]
 
 		if newRow >= 0 && newRow < m && newCol >= 0 && newCol < n {
-			if board[newRow][newCol] == 1 || board[newRow][newCol] == -1 {
+			if b.matrix[newRow][newCol] == 1 || b.matrix[newRow][newCol] == -1 {
 				liveCount++
 			}
 		}

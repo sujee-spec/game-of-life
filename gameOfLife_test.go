@@ -20,13 +20,15 @@ func TestNewBoard(t *testing.T) {
 }
 
 func TestCountLiveNeighborsTopLeftCorner(t *testing.T) {
-	board := [][]int{
-		{0, 1, 0},
-		{1, 1, 0},
-		{0, 0, 1},
+	board := &Board{
+		matrix: Matrix{
+			{0, 1, 0},
+			{1, 1, 0},
+			{0, 0, 1},
+		},
 	}
 
-	got := countLiveNeighbors(board, 0, 0)
+	got := board.countLiveNeighbors(0, 0) 
 	want := 3
 
 	if got != want {
@@ -34,17 +36,19 @@ func TestCountLiveNeighborsTopLeftCorner(t *testing.T) {
 	}
 }
 
-func TestCountLiveNeighborsTopMiddle(t *testing.T) {
-	board := [][]int{
-		{0, 1, 0},
-		{1, 1, 0},
-		{0, 0, 1},
+func TestCountLiveNeighborsCenter(t *testing.T) {
+	board := &Board{
+		matrix: Matrix{
+			{0, 1, 0},
+			{1, 1, 0},
+			{0, 0, 1},
+		},
 	}
 
-	got := countLiveNeighbors(board, 0, 1)
-	want := 2
+	got := board.countLiveNeighbors(1, 1)
+	want := 3
 
 	if got != want {
-		t.Errorf("countLiveNeighbors(0,1) = %d; want %d", got, want)
+		t.Errorf("countLiveNeighbors(1,1) = %d; want %d", got, want)
 	}
 }
