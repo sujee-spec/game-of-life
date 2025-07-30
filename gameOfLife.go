@@ -1,16 +1,18 @@
 package gameoflife
 
-type board struct {
-	matrix matrix
+type Matrix [][]int
+
+type Board struct {
+	matrix Matrix
 }
 
-type matrix [][]int
-
-func NewBoard(m, n int) *board {
-	matrix := make([][]int, m)
-
-	for i := range matrix {
-		matrix[i] = make([]int, n)
+func NewBoard(input [][]int, m, n int) *Board {
+	mat := make(Matrix, m)
+	for i := 0; i < m; i++ {
+		mat[i] = make([]int, n)
+		for j := 0; j < n; j++ {
+			mat[i][j] = input[i][j]
+		}
 	}
-	return &board{matrix}
+	return &Board{matrix: mat}
 }
