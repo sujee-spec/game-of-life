@@ -23,7 +23,6 @@ var directions = [][]int{
 	{1, -1}, {1, 0}, {1, 1},
 }
 
-
 func (b *Board) countLiveNeighbors(row, col int) int {
 	m := len(b.matrix)
 	n := len(b.matrix[0])
@@ -40,4 +39,40 @@ func (b *Board) countLiveNeighbors(row, col int) int {
 		}
 	}
 	return liveCount
+}
+
+func (b *Board) GameOfLife() {
+	m := len(b.matrix)
+	if m == 0 {
+		return
+	}
+	n := len(b.matrix[0])
+
+	for i := range m {
+		for j := 0; j < n; j++ {
+			liveNeighbors := b.countLiveNeighbors(i, j)
+
+			switch b.matrix[i][j] {
+			case 1:
+				if liveNeighbors < 2 || liveNeighbors > 3 {
+					b.matrix[i][j] = -1
+				}
+			case 0:
+				if liveNeighbors == 3 {
+					b.matrix[i][j] = 2
+				}
+			}
+		}
+	}
+
+	for i := range m {
+		for j := 0; j < n; j++ {
+			switch b.matrix[i][j] {
+			case -1:
+				b.matrix[i][j] = 0
+			case 2:
+				b.matrix[i][j] = 1
+			}
+		}
+	}
 }
